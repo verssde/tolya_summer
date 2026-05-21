@@ -9,23 +9,20 @@ def read_text():
         text = text + line + "\n"
     return text
 
-
 # ОЧИСТКА ТЕКСТА
 def clean(text):
     text = text.lower()
-    punctuation = '.,!?;:-()[]{}"—'
+    punctuation = ".,!?;:-()[]{}\"—"
     cleaned = ""
     for char in text:
         if char not in punctuation:
             cleaned = cleaned + char
     return cleaned
 
-
 # РАЗДЕЛЕНИЕ НА СЛОВА
 def get_words(text):
     words = text.split()
     return words
-
 
 # ПОДСЧЕТ ЧАСТОТЫ СЛОВ
 def count_words(words):
@@ -37,17 +34,14 @@ def count_words(words):
             word_count[word] = 1
     return word_count
 
-
 # ТОП 10 СЛОВ
 def top_words(word_count):
     sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
     return sorted_words[:10]
 
-
 # TTR
 def ttr(words, word_count):
     return len(word_count) / len(words)
-
 
 # БИГРАММЫ
 def find_bigrams(words):
@@ -64,7 +58,6 @@ def find_bigrams(words):
             result.append((bigram, bigram_count[bigram]))
     return result
 
-
 # СРЕДНЯЯ ДЛИНА СЛОВА
 def average_word_length(words):
     total_length = 0
@@ -73,7 +66,6 @@ def average_word_length(words):
     if len(words) == 0:
         return 0
     return total_length / len(words)
-
 
 # РАЗБИЕНИЕ НА ПРЕДЛОЖЕНИЯ
 def split_sentences(original_text):
@@ -87,7 +79,6 @@ def split_sentences(original_text):
                 sentences.append(sentence)
             current = ""
     return sentences
-
 
 # СРЕДНЯЯ ДЛИНА ПРЕДЛОЖЕНИЯ
 def analyze_sentences(sentences):
