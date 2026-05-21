@@ -9,20 +9,23 @@ def read_text():
         text = text + line + "\n"
     return text
 
+
 # ОЧИСТКА ТЕКСТА
 def clean(text):
     text = text.lower()
-    punctuation = ".,!?;:-()[]{}\"—"
+    punctuation = '.,!?;:-()[]{}"—'
     cleaned = ""
     for char in text:
         if char not in punctuation:
             cleaned = cleaned + char
     return cleaned
 
+
 # РАЗДЕЛЕНИЕ НА СЛОВА
 def get_words(text):
     words = text.split()
     return words
+
 
 # ПОДСЧЕТ ЧАСТОТЫ СЛОВ
 def count_words(words):
@@ -34,14 +37,17 @@ def count_words(words):
             word_count[word] = 1
     return word_count
 
+
 # ТОП 10 СЛОВ
 def top_words(word_count):
     sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
     return sorted_words[:10]
 
+
 # TTR
 def ttr(words, word_count):
     return len(word_count) / len(words)
+
 
 # БИГРАММЫ
 def find_bigrams(words):
@@ -58,6 +64,7 @@ def find_bigrams(words):
             result.append((bigram, bigram_count[bigram]))
     return result
 
+
 # СРЕДНЯЯ ДЛИНА СЛОВА
 def average_word_length(words):
     total_length = 0
@@ -66,6 +73,7 @@ def average_word_length(words):
     if len(words) == 0:
         return 0
     return total_length / len(words)
+
 
 # РАЗБИЕНИЕ НА ПРЕДЛОЖЕНИЯ
 def split_sentences(original_text):
@@ -79,6 +87,7 @@ def split_sentences(original_text):
                 sentences.append(sentence)
             current = ""
     return sentences
+
 
 # СРЕДНЯЯ ДЛИНА ПРЕДЛОЖЕНИЯ
 def analyze_sentences(sentences):
@@ -95,27 +104,3 @@ def analyze_sentences(sentences):
     if len(sentences) == 0:
         return 0, "", 0
     return (total_words / len(sentences)), max_length_sentence, max_length
-
-# ГЛАВНЫЙ КОД
-raw_text = read_text()
-cleaned_text = clean(raw_text)
-words = get_words(cleaned_text)
-word_freq = count_words(words)
-
-# ВЫВОД
-print("\n10 самых частых слов:")
-for i, (word, freq) in enumerate(top_words(word_freq), 1):
-    print(f'{i}. {word} - {freq}')
-
-print(f'Индекс разнообразия TTR: {ttr(words, word_freq)}')
-
-bigrams = find_bigrams(words)
-print(f'Найденные коллокации (биграммы >2 раз): {bigrams[:20]}')
-
-avg_word_len = average_word_length(words)
-print(f'Средняя длина слова: {avg_word_len:.2f}')
-
-sentences = split_sentences(raw_text)
-avg_sent_len, longest_sentence, max_len = analyze_sentences(sentences)
-print(f'Средняя длина предложения: {avg_sent_len:.2f}')
-print(f'Самое длинное предложение: {longest_sentence} ({max_len} слов)')
